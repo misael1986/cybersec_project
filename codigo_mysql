@@ -1,0 +1,10 @@
+create database node_mysql;
+
+CREATE TABLE `bloques_notas` (
+  `id` int UNSIGNED NOT NULL auto_increment primary key,
+  `blockId` int NOT NULL,
+  `fecha` date NOT NULL,
+  `datos` varchar(500) NOT NULL,
+  `previosHash` varchar(500) NOT NULL,
+  `thishash` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
