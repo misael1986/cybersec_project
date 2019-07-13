@@ -1,5 +1,91 @@
 const SHA256 = require('crypto-js/sha256')
-const GUARDAR = require("mysql")
+const mysql = require('mysql');
+
+//------------------------------------------------------------------------------------
+
+class MySQL {
+
+    constructor() {
+
+    }
+
+    conexion() {
+        var connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'node_mysql',
+            port: 3306
+        });
+        connection.connect(function (error) {
+            if (error) {
+                throw error;
+            } else {
+                console.log('Conexion correcta.');
+            }
+        });
+        connection.end();
+        module.exports = {
+            "conexion": conexion
+        }
+    }
+
+    //https://fernando-gaitan.com.ar/introduccion-a-node-js-parte-14-conectar-node-js-con-mysql/
+    insert_data(dato1, dato2, dato3, dato4, dato5) {
+        var connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'node_mysql',
+            port: 3306
+        });
+        var query = connection.query('INSERT INTO bloques_notas(blockId, fecha, datos, previosHash, thishash)'
+            + ' VALUES(?, ?, ?, ?, ?)',
+            [dato1, dato2, JSON.stringify(dato3), dato4, dato5], function (error, result) {
+                if (error) {
+                    console.log('error', error.message, error.stack);
+                } else {
+                    console.log(result);
+                }
+            }
+        );
+        connection.end();
+        module.exports = {
+            "insert_data": this.insert_data
+        }
+
+    }
+
+    load_data(valor) {
+        var connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'node_mysql',
+            port: 3306
+        });
+        var query = connection.query('SELECT blockId, fecha, datos, previosHash, thishash FROM bloques_notas WHERE id = ?', [valor], function (error, result) {
+            if (error) {
+                console.log('error', error.message, error.stack);
+            } else {
+                var resultado = result;
+                if (resultado.length > 0) {
+                    console.log(resultado[0].blockId + ' ' + resultado[0].fecha + '  ' + resultado[0].previosHash + '  ' + resultado[0].thishash + '   ' + resultado[0].datos);
+                } else {
+                    console.log('Registro no encontrado');
+                }
+            }
+        }
+        );
+        connection.end();
+        module.exports = {
+            "load_data": this.load_data
+        }
+    }
+}
+
+
+//------------------------------------------------------------------------------------
 
 class Block {
     constructor(index, idAlum, IdAsig, PA, NF, NMA, previousHash = '') {
@@ -23,6 +109,8 @@ class Block {
     }
 }
 
+//--------------------------------------------------------------------------------
+
 class BlockChain {
     constructor(genesis, difficulty = '0000') {
         this.chain = [this.createFirstBlock(genesis)];
@@ -40,7 +128,14 @@ class BlockChain {
         newblock.miner(this.difficulty);
         console.log('Minado! ' + newblock.hash + ' con nonce ' + newblock.nonce);
         this.chain.push(newblock);
-        GUARDAR.insert_data(newblock.index,newblock.date,newblock.data,newblock.previousHash,newblock.hash);
+        let guarda = new MySQL();
+        guarda.insert_data(newblock.index, newblock.date, newblock.data, newblock.previousHash, newblock.hash);
+    }
+
+    showData(data) {
+        let carga = new MySQL();
+        carga.load_data(data);
+
     }
 
     isValid() {
@@ -65,7 +160,8 @@ class BlockChain {
 
 let naniCoin = new BlockChain('informacion inicial genesis');
 //console.log(JSON.stringify(naniCoin,null,2));
-naniCoin.addBlock('561203212', '2028141', '2006', '4.2', '3.0');//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
-naniCoin.addBlock('561203212', '2026001', '2006', '3.9', '3.5');//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria (Ingles 3.5)
-console.log(JSON.stringify(naniCoin,null,2));
-console.log(naniCoin.isValid());
+naniCoin.addBlock('561203212', '2018131', '2007-I', '3.6', '3.0');//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
+naniCoin.addBlock('561203212', '2036001', '2006-II', '4.9', '3.5');//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria (Ingles 3.5)
+console.log(JSON.stringify(naniCoin, null, 2));
+//naniCoin.showData(2);
+//console.log(naniCoin.isValid());
