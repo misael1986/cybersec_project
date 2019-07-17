@@ -12,12 +12,12 @@ class MySQL {
     conexion() {
         var connection = mysql.createConnection({
             host: 'localhost',
-            user: 'root',
-            password: '',
+            user: 'rootnode',
+            password: 'root',
             database: 'node_mysql',
             port: 3306
         });
-        connection.connect(function (error) {
+        connection.connect(function(error) {
             if (error) {
                 throw error;
             } else {
@@ -34,14 +34,14 @@ class MySQL {
     insert_data(dato1, dato2, dato3, dato4, dato5) {
         var connection = mysql.createConnection({
             host: 'localhost',
-            user: 'root',
-            password: '',
+            user: 'rootnode',
+            password: 'root',
             database: 'node_mysql',
             port: 3306
         });
-        var query = connection.query('INSERT INTO bloques_notas(blockId, fecha, datos, previosHash, thishash)'
-            + ' VALUES(?, ?, ?, ?, ?)',
-            [dato1, dato2, JSON.stringify(dato3), dato4, dato5], function (error, result) {
+        var query = connection.query('INSERT INTO bloques_notas(blockId, fecha, datos, previosHash, thishash)' +
+            ' VALUES(?, ?, ?, ?, ?)', [dato1, dato2, JSON.stringify(dato3), dato4, dato5],
+            function(error, result) {
                 if (error) {
                     console.log('error', error.message, error.stack);
                 } else {
@@ -59,12 +59,12 @@ class MySQL {
     load_data(valor) {
         var connection = mysql.createConnection({
             host: 'localhost',
-            user: 'root',
-            password: '',
+            user: 'rootnode',
+            password: 'root',
             database: 'node_mysql',
             port: 3306
         });
-        var query = connection.query('SELECT blockId, fecha, datos, previosHash, thishash FROM bloques_notas WHERE id = ?', [valor], function (error, result) {
+        var query = connection.query('SELECT blockId, fecha, datos, previosHash, thishash FROM bloques_notas WHERE id = ?', [valor], function(error, result) {
             if (error) {
                 console.log('error', error.message, error.stack);
             } else {
@@ -75,8 +75,7 @@ class MySQL {
                     console.log('Registro no encontrado');
                 }
             }
-        }
-        );
+        });
         connection.end();
         module.exports = {
             "load_data": this.load_data
@@ -89,9 +88,9 @@ class MySQL {
 
 class Block {
     constructor(index, idAlum, IdAsig, PA, NF, NMA, previousHash = '') {
-        this.index = index;//indice del bloque
-        this.date = new Date();//fecha actual de creación del bloque
-        this.data = new Array(idAlum, IdAsig, PA, NF, NMA);//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
+        this.index = index; //indice del bloque
+        this.date = new Date(); //fecha actual de creación del bloque
+        this.data = new Array(idAlum, IdAsig, PA, NF, NMA); //ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
         this.previousHash = previousHash;
         this.hash = this.createHash();
         this.nonce = 0;
@@ -160,8 +159,8 @@ class BlockChain {
 
 let naniCoin = new BlockChain('informacion inicial genesis');
 //console.log(JSON.stringify(naniCoin,null,2));
-naniCoin.addBlock('561203212', '2018131', '2007-I', '3.6', '3.0');//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
-naniCoin.addBlock('561203212', '2036001', '2006-II', '4.9', '3.5');//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria (Ingles 3.5)
+naniCoin.addBlock('561203212', '2018131', '2007-I', '3.6', '3.0'); //ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
+naniCoin.addBlock('561203212', '2036001', '2006-II', '4.9', '3.5'); //ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria (Ingles 3.5)
 console.log(JSON.stringify(naniCoin, null, 2));
 //naniCoin.showData(2);
-//console.log(naniCoin.isValid());
+//console.log(naniCoin.isValid());clear
