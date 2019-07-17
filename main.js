@@ -157,10 +157,16 @@ class BlockChain {
 //block = new Block (0, 'prueba');
 //console.log(JSON.stringify(block,null,2));
 
-let naniCoin = new BlockChain('informacion inicial genesis');
+/* let naniCoin = new BlockChain('informacion inicial genesis');
 //console.log(JSON.stringify(naniCoin,null,2));
-naniCoin.addBlock('561203212', '2018131', '2007-I', '3.6', '3.0'); //ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
-naniCoin.addBlock('561203212', '2036001', '2006-II', '4.9', '3.5'); //ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria (Ingles 3.5)
+naniCoin.addBlock('561203212', '2018131', '2007-I', '3.6', '3.0');
+//ID del Alumno, ID de la Asignatura, Periodo Academico, Nota Final, Nota mínima aprobatoria
 console.log(JSON.stringify(naniCoin, null, 2));
 //naniCoin.showData(2);
-//console.log(naniCoin.isValid());clear
+//console.log(naniCoin.isValid());clear */
+
+module.exports = {
+    registro: function(nota) {
+        return nota + nota;
+    }
+};

@@ -11,7 +11,7 @@
 
 <body>
     <div class="register-form">
-        <form>
+        <form method="POST" action="/reg">
             <h2 class="text-center">Sistema de notas Block-Chain</h2>
             <div class="logo">
                 <img src="img/logo.png" alt="">
@@ -36,11 +36,11 @@
             </div>
             <div class="form-group">
                 <label>Nota mínima</label>
-                <input type="text" class="form-control" placeholder="3.0">
+                <input type="text" name="nMin" class="form-control" placeholder="3.0">
             </div>
             <div class="form-group">
                 <label>Nota aprobatoria</label>
-                <input type="text" class="form-control" placeholder="5.0">
+                <input type="text" name="nMax" class="form-control" placeholder="5.0">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Observaciones</label>
