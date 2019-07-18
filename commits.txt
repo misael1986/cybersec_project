@@ -1,0 +1,39 @@
+commit 383d346a706d6bd9f8d8a21f4dc50275646d8026
+Author: Jhon Mendez <jhonmendex@MacBook-Pro-de-Jhon.local>
+Date:   Wed Jul 17 18:33:49 2019 -0500
+
+    version estable con conexion entre archivos y funciones
+
+commit 7baf0342f7c99d22addaa8ab6f3925f026a1f97d
+Author: Jhon Mendez <jhonmendex@MacBook-Pro-de-Jhon.local>
+Date:   Wed Jul 17 17:43:18 2019 -0500
+
+    version estable con la bd funcionando y minando
+
+commit a7c9307389a262732c2de459344b893a3a068f9a
+Author: Jhon Mendez <jhonmendex@MacBook-Pro-de-Jhon.local>
+Date:   Tue Jul 16 19:07:11 2019 -0500
+
+    version estable interfaz grafica
+
+commit 2d95c24618aa5255178de28037d5f2b710cf5165
+Author: misael1986 <gabelogan0167@hotmail.com>
+Date:   Sat Jul 13 13:45:23 2019 -0500
+
+    Version 2 en pruebas
+
+commit b0497849b97d7671e23354b50059e0487c325c01
+Author: misael1986 <gabelogan0167@hotmail.com>
+Date:   Sat Jul 13 13:42:16 2019 -0500
+
+    Version 2
+    
+    Version 2 con almacenamiento en BD MySQL
+
+commit dc42af70c0fad56419f3d647f94321b8bf862f28
+Author: misael1986 <gabelogan0167@hotmail.com>
+Date:   Sat Jul 13 12:06:35 2019 -0500
+
+    Version 1
+    
+    Version 1 de la aplicacion

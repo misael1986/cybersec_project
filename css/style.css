@@ -41,3 +41,13 @@
     background-color: rgba(140, 172, 54, 1);
     border: rgba(140, 172, 54, 0.5);
 }
+
+.hide {
+    display: none;
+}
+
+.alert {
+    margin: 0 auto;
+    position: relative;
+    bottom: 350px;
+}
